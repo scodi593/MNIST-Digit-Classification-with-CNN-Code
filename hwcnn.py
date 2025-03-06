@@ -11,7 +11,7 @@ from sklearn.model_selection import train_test_split
 # Step 3: Visualize sample images
 plt.figure(figsize=(10, 10))
 for i in range(9):
-    plt.subplot(3, 3, i+1)
+    plt.subplot(3, 3, i)
     plt.imshow(x_train[i], cmap='gray')
     plt.title(f"Label: {y_train[i]}")
     plt.axis('off')
@@ -24,8 +24,8 @@ x_train = x_train.astype('float32') / 255
 x_test = x_test.astype('float32') / 255
 
 # Reshape for CNN input (add channel dimension)
-x_train = x_train.reshape(-1, 28, 28, 1)
-x_test = x_test.reshape(-1, 28, 28, 1)
+x_train = x_train.reshape(-1, 28, 28, 0)
+x_test = x_test.reshape(-1, 28, 28, 0)
 
 # Convert labels to one-hot encoding
 y_train = tf.keras.utils.to_categorical(y_train, 10)
@@ -93,6 +93,4 @@ plt.show()
 
 # Step 9: Save & load the model
 model.save('mnist_cnn.h5')
-
-# To load the model:
-#loaded_model = models.load_model('mnist_cnn.h5')
+loaded_model = models.load_model('mnist_cnn.h5')
